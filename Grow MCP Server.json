@@ -1,0 +1,76 @@
+{
+  "name": "Grow MCP Server",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "8da09454-bef8-4d2d-bfff-6d73737c5d19"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2.1,
+      "position": [
+        -464,
+        -304
+      ],
+      "id": "ae1d243e-9eec-49fc-b77f-c02804a262d0",
+      "name": "MCP Server Trigger",
+      "webhookId": "8da09454-bef8-4d2d-bfff-6d73737c5d19"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Updates the existing Groww Weekly Product Pulse Google Doc. This tool is mandatory and must be called once for every report execution. Call it with the complete final report in clean plain text using the report_text input. Do not include HTML tags or CSS. Do not create a new document or append duplicate content. Invoke this tool independently of the Gmail tool and verify the tool response before reporting success.",
+        "operation": "update",
+        "documentURL": "https://docs.google.com/document/d/1kpCyyAD7pej25j6Ir8DF6lhQzGX0-Kl0rJhPFOFo3BY/edit?tab=t.0",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $fromAI('report_text', 'The complete Weekly Groww Product Pulse report as clean, readable plain text. Do not include HTML tags, CSS, or Markdown formatting.', 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        -496,
+        -112
+      ],
+      "id": "99c48638-29fa-4656-bfcc-fd75448b6308",
+      "name": "Update a document in Google Docs",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "PKfqWne7zALasxuL",
+          "name": "Google Docs account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Update a document in Google Docs": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "c7592deb-7732-4697-946c-8f1336ca3034",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9fce7bee488ef38675267e325f9877ca80c652ebf4591d051f7fb6f3034f3896"
+  },
+  "nodeGroups": [],
+  "id": "7NhECbdBp9yZeGLV",
+  "tags": []
+}
